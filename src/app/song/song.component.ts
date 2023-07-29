@@ -23,7 +23,28 @@ export class SongComponent implements OnInit {
         this.songService.getSongs().subscribe(
             (response: Song[]) => {
                 this.songs = response;
-                console.log(this.songs)
+            },
+            (error: HttpErrorResponse) => {
+                alert(error.message);
+            }
+        )
+    }
+
+    public deleteSongById(songId: number): void {
+        this.songService.deleteSong(songId).subscribe(
+            () => {
+                this.getSongs();
+            },
+            (error: HttpErrorResponse) => {
+                alert(error.message);
+            }
+        )
+    }
+
+    public seedSongs(): void {
+        this.songService.seedSongs().subscribe(
+            () => {
+                this.getSongs();
             },
             (error: HttpErrorResponse) => {
                 alert(error.message);

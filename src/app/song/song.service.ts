@@ -7,27 +7,32 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class SongService {
-    private apiServerUrl = 'http://localhost:8080/song';
+    private baseUrl = 'http://localhost:8080'
+    private songUrl = `${this.baseUrl}/song`;
 
     constructor(private http: HttpClient) { }
 
     public getSongs(): Observable<Song[]> {
-        return this.http.get<any>(`${this.apiServerUrl}/all`);
+        return this.http.get<any>(`${this.songUrl}/all`);
     }
 
     public findSongById(songId: number): Observable<Song> {
-        return this.http.get<any>(`${this.apiServerUrl}/find/${songId}`)
+        return this.http.get<any>(`${this.songUrl}/find/${songId}`)
     }
 
     public addSong(song: Song): Observable<Song> {
-        return this.http.post<any>(`${this.apiServerUrl}/add`, song);
+        return this.http.post<any>(`${this.songUrl}/add`, song);
     }
 
     public updateSong(song: Song): Observable<Song> {
-        return this.http.put<any>(`${this.apiServerUrl}/update`, song);
+        return this.http.put<any>(`${this.songUrl}/update`, song);
     }
 
     public deleteSong(songId: number): Observable<void> {
-        return this.http.delete<any>(`${this.apiServerUrl}/delete/${songId}`);
+        return this.http.delete<any>(`${this.songUrl}/delete/${songId}`);
+    }
+
+    public seedSongs(): Observable<void> {
+        return this.http.get<any>(`${this.baseUrl}/seed`)
     }
 }
