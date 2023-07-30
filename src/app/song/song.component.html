@@ -1,24 +1,35 @@
-<button (click)="seedSongs()">Seed Songs</button>
 
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Artists</th>
-        <th>Image</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    <tr *ngFor="let song of songs">
-        <td><a href="{{song.spotifyLink}}">{{song.title}}</a></td>
-        <td>
-            <div *ngFor="let artist of song.artists">
-                {{artist.name}}
-            </div>
-        </td>
-        <td>
-            <img src="{{song.imageUrl}}" alt="" style="width:100px;">
-        </td>
-        <td><button>Edit</button></td>
-        <td><button (click)="deleteSongById(song.id)">Delete</button></td>
-    </tr>
-</table>
+
+<div class="container">
+    <button class="btn btn-success" (click)="seedSongs()">Add template song</button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Spotify Link</th>
+            <th>Sound Preview</th>
+            <th>Artists</th>
+            <th>Image</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let song of songs">
+            <td>{{song.title}}</td>
+            <td>{{song.spotifyLink}}</td>
+            <td>{{song.soundPreview}}</td>
+            <td>
+                <div *ngFor="let artist of song.artists">
+                    {{artist.name}}
+                </div>
+            </td>
+            <td>
+                <img src="{{song.imageUrl}}" alt="" style="width:100px;">
+            </td>
+            <td><button class="btn btn-primary">Edit</button></td>
+            <td><button class="btn btn-danger" (click)="deleteSongById(song.id)">Delete</button></td>
+        </tr>
+    </tbody>
+    </table>
+</div>

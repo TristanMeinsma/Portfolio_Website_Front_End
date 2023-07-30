@@ -22,6 +22,7 @@ export class SongComponent implements OnInit {
     public getSongs(): void {
         this.songService.getSongs().subscribe(
             (response: Song[]) => {
+                console.log(response);
                 this.songs = response;
             },
             (error: HttpErrorResponse) => {
