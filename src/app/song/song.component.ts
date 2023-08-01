@@ -75,20 +75,44 @@ export class SongComponent implements OnInit {
 
     public addSong(addForm: NgForm): void {
         document.getElementById("add-song-form")?.click();
+
+        const songWithArtists = {
+            ...addForm.value,
+            artists: this.selectedArtists
+        };
+
         this.songService.addSong(addForm.value).subscribe(
             (response: Song) => {
-                console.log("Trying to save this")
-                console.log(addForm.value)
                 console.log(response);
                 this.getSongs();
                 addForm.reset();
             },
             (error: HttpErrorResponse) => {
-                console.log("Trying to save this")
-                console.log(addForm.value)
                 alert(error.message);
                 addForm.reset();
             }
         );
     }
+
+    public openModal(song: Song | null, mode: string): void {
+		const container = document.getElementById('main-container');
+		const button = document.createElement('button');
+		button.type = 'button';
+		button.style.display = 'none';
+		button.setAttribute('data-toggle', 'modal');
+		if (mode === 'add') {
+			button.setAttribute('data-target', '#addSongModal')
+		}
+		// if (mode === 'edit') {
+		// 	this.editEmployee = song;
+		// 	button.setAttribute('data-target', '#updateEmployeeModal')
+		// }
+		// if (mode === 'delete') {
+		// 	this.deleteEmployee = song;
+		// 	button.setAttribute('data-target', '#deleteEmployeeModal')
+		// }
+
+		container?.appendChild(button);
+		button.click();
+	}
 }

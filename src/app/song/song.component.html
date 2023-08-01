@@ -1,7 +1,8 @@
 
-
-<div class="container">
-    <button class="btn btn-success" (click)="seedSongs()">Add template song</button>
+<!-- Overview Songs -->
+<div class="container" id="main-container">
+    <h1>All Songs</h1>
+    <button id="add-new-song" class="btn btn-success" (click)="openModal(null, 'add')">Add Song</button>
     <table class="table">
         <thead>
         <tr>
@@ -34,8 +35,8 @@
     </table>
 </div>
 
-<div class="container">
-    <div class="modal-fade" id="addSongModal">
+<!-- Add Song Modal (visible) -->
+    <div class="modal fade" id="addSongModal" tabindex="-1" role="dialog" aria-labelledby="addSongModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -55,10 +56,9 @@
                         <div class="form-group">
                             <label for="artists">Artist</label>
                             <select multiple [(ngModel)]="selectedArtists" name="artists" class="form-control">
-                                <option *ngFor="let artist of artists" [value]="artist.id">{{ artist.name }}</option>
+                                <option *ngFor="let artist of artists" [ngValue]="artist">{{ artist.name }}</option>
                             </select>
-                        </div>
-                        
+                        </div>                                           
     
                         <div class="form-group">
                             <label for="imageUrl">Image Url</label>
@@ -76,13 +76,11 @@
                         </div>
                 
                         <div class="modal-footer">
-                            <button class="btn btn-warning">Cancel</button>
-                            <button type="submit" class="btn btn-success" id="add-song-form">Add</button>
+                            <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" id="add-song-form">Save</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div> 
     </div>
-</div>
-
