@@ -1,4 +1,4 @@
-import { Artist } from "../artist";
+import { Artist } from "../artist/artist";
 
 export interface Song {
     id: number;
