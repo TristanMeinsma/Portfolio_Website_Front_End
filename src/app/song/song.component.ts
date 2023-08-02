@@ -13,7 +13,7 @@ import { ArtistService } from '../artist/artist.service';
 })
 export class SongComponent implements OnInit {
     public songs!: Song[];
-    public editSong!: Song;
+    public editSong: Song | null | undefined;
     public deleteSong!: Song;
     public artists!: Artist[];
     public selectedArtists: number[] = [];
@@ -94,25 +94,33 @@ export class SongComponent implements OnInit {
         );
     }
 
-    public openModal(song: Song | null, mode: string): void {
-		const container = document.getElementById('main-container');
-		const button = document.createElement('button');
-		button.type = 'button';
-		button.style.display = 'none';
-		button.setAttribute('data-toggle', 'modal');
-		if (mode === 'add') {
-			button.setAttribute('data-target', '#addSongModal')
-		}
-		// if (mode === 'edit') {
-		// 	this.editEmployee = song;
-		// 	button.setAttribute('data-target', '#updateEmployeeModal')
-		// }
-		// if (mode === 'delete') {
-		// 	this.deleteEmployee = song;
-		// 	button.setAttribute('data-target', '#deleteEmployeeModal')
-		// }
+    public updateSong(song: Song): void {
+        this.songService.updateSong(song).subscribe(
+            (response: Song) => {
+                console.log(response);
+                this.getSongs();
+            },
+            (error: HttpErrorResponse) => {
+                alert(error.message);
+            }
+        )
+    }
 
-		container?.appendChild(button);
-		button.click();
-	}
+    public openModal(song: Song | null, mode: string): void {
+        const container = document.getElementById('main-container');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.style.display = 'none';
+        button.setAttribute('data-toggle', 'modal');
+        if (mode === 'add') {
+            button.setAttribute('data-target', '#addSongModal')
+        }
+        if (mode === 'edit') {
+        	this.editSong = song;
+        	button.setAttribute('data-target', '#updateSongModal')
+        }
+
+        container?.appendChild(button);
+        button.click();
+    }
 }
