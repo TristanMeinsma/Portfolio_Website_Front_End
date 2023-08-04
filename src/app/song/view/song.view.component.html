@@ -1,0 +1,19 @@
+<div class="song-slider" >
+    <div *ngFor="let song of songs; let i = index">
+        <div class="card" #card style="width: 18rem;">
+            <div class="image-border">
+                <img class="card-img-top soft-border" src="{{ song.imageUrl }}" alt="Card image cap">
+            </div>
+            
+            <div class="card-body">
+                <h5 class="card-title"><a href="{{ song.spotifyLink }}">{{ song.title }}</a></h5>
+                <p class="card-text"><small>
+                    <ng-container *ngFor="let artist of song.artists; last as isLast">
+                        {{ artist.name }}{{ isLast ? '' : ', ' }}
+                      </ng-container>
+                </small></p>
+                <img src="https://cdn2.iconfinder.com/data/icons/basics-1/100/Play-512.png" class="play-button" alt="">
+            </div>
+        </div>
+    </div>
+</div>

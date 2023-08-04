@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Song } from './song';
-import { SongService } from './song.service';
+import { Song } from '../song';
+import { SongService } from '../song.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { Artist } from '../artist/artist';
-import { ArtistService } from '../artist/artist.service';
+import { Artist } from '../../artist/artist';
+import { ArtistService } from '../../artist/artist.service';
 
 @Component({
-    selector: 'app-song',
-    templateUrl: './song.component.html',
-    styleUrls: ['./song.component.css']
+    selector: 'song-admin',
+    templateUrl: './song.admin.component.html',
+    styleUrls: ['./song.admin.component.css']
 })
-export class SongComponent implements OnInit {
+export class SongAdminComponent implements OnInit {
     public songs!: Song[];
     public editSong: Song | null | undefined;
     public deleteSong!: Song;
@@ -28,8 +28,6 @@ export class SongComponent implements OnInit {
     public getSongs(): void {
         this.songService.getSongs().subscribe(
             (response: Song[]) => {
-                console.log("All Songs:")
-                console.log(response);
                 this.songs = response;
             },
             (error: HttpErrorResponse) => {
@@ -41,8 +39,6 @@ export class SongComponent implements OnInit {
     public getArtists(): void {
         this.artistService.getArtists().subscribe(
             (response: Artist[]) => {
-                console.log("All Artists:")
-                console.log(response);
                 this.artists = response;
             },
             (error: HttpErrorResponse) => {
@@ -116,8 +112,8 @@ export class SongComponent implements OnInit {
             button.setAttribute('data-target', '#addSongModal')
         }
         if (mode === 'edit') {
-        	this.editSong = song;
-        	button.setAttribute('data-target', '#updateSongModal')
+            this.editSong = song;
+            button.setAttribute('data-target', '#updateSongModal')
         }
 
         container?.appendChild(button);

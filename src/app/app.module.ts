@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
-import { SongComponent } from './song/song.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
+
+import { SongAdminComponent } from './song/admin/song.admin.component';
+import { SongViewComponent } from './song/view/song.view.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    SongComponent
+    SongAdminComponent,
+    SongViewComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule
