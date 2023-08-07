@@ -58,17 +58,6 @@ export class SongAdminComponent implements OnInit {
         )
     }
 
-    public seedSongs(): void {
-        this.songService.seedSongs().subscribe(
-            () => {
-                this.getSongs();
-            },
-            (error: HttpErrorResponse) => {
-                alert(error.message);
-            }
-        )
-    }
-
     public addSong(addForm: NgForm): void {
         document.getElementById("add-song-form")?.click();
 

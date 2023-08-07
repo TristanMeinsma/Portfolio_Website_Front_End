@@ -1,0 +1,142 @@
+<!-- Overview Artists -->
+<div class="container" id="main-container">
+
+    <h1>All Artists</h1>
+    <button id="add-new-song" class="btn btn-success" (click)="openModal(null, 'add')">Add Artist</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Spotify Link</th>
+                <th>Image</th>
+                <th>Show</th>
+                <th>Order Number</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let artist of artists">
+                <td>{{artist.name}}</td>
+                <td><a href="{{artist.spotifyProfileUrl}}">{{artist.spotifyProfileUrl}}</a></td>
+                <td>
+                    <img src="{{artist.imageUrl}}" alt="" style="width:100px;">
+                </td>
+                <td>{{artist.showOnWebsite}}</td>
+                <td>{{artist.orderNumber}}</td>
+                <td><button class="btn btn-primary" (click)="openModal(artist, 'edit')">Edit</button></td>
+                <td><button class="btn btn-danger" (click)="deleteArtistById(artist.artistId)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Preview</h2>
+    <div id="preview">
+        
+        <p>komt nog</p>
+    </div>
+</div>
+
+<!-- Add Artist Modal -->
+<div class="modal fade" id="addArtistModal" tabindex="-1" role="dialog" aria-labelledby="addArtistModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Song</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #addForm="ngForm" (ngSubmit)="addArtist(addForm)">
+
+                    <div class="form-group">
+                        <label for="title">Name</label>
+                        <input type="text" ngModel name="name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="artists">Spotify Url</label>
+                        <input type="text" ngModel name="spotifyProfileUrl" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageUrl">Image Url</label>
+                        <input type="text" ngModel name="imageUrl" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="showOnWebsite">Show On Website</label>
+                        <div class="form-control">
+                            <input type="checkbox" ngModel name="showOnWebsite">
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number</label>
+                        <input type="number" ngModel name="orderNumber" class="form-control">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal" id="add-artist-form">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Artist Modal -->
+<div class="modal fade" id="updateArtistModal" tabindex="-1" role="dialog" aria-labelledby="editArtistModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Artist {{editArtist?.name}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #editForm="ngForm">
+
+                    <input type="hidden" ngModel="{{editArtist?.artistId}}" name="id" class="form-control" id="id">
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" ngModel="{{editArtist?.name}}" name="name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="spotifyProfileUrl">Spotify Link</label>
+                        <input type="text" ngModel="{{editArtist?.spotifyProfileUrl}}" name="spotifyProfileUrl" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageUrl">Image Url</label>
+                        <input type="text" ngModel="{{editArtist?.imageUrl}}" name="imageUrl" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="showOnWebsite">Show On Website</label>
+                        <div class="form-control">
+                            <input type="checkbox" ngModel="{{editArtist?.showOnWebsite}}" name="showOnWebsite">
+                        </div> 
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number</label>
+                        <input type="number" ngModel="{{editArtist?.orderNumber}}" name="orderNumber" class="form-control">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal" id="edit-artist-form">Cancel</button>
+                        <button (click)="updateArtist(editForm.value)" type="submit" data-dismiss="modal" class="btn btn-primary" >Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

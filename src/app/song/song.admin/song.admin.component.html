@@ -22,7 +22,7 @@
         <tbody>
             <tr *ngFor="let song of songs">
                 <td>{{song.title}}</td>
-                <td>{{song.spotifyLink}}</td>
+                <td><a *ngIf="song.spotifyLink" href="{{song.spotifyLink}}">{{ song.spotifyLink.length > 40 ? (song.spotifyLink | slice:13:40) + '...' : song.spotifyLink }}</a></td>
                 <td>{{song.soundPreview}}</td>
                 <td>
                     <div *ngFor="let artist of song.artists">
@@ -33,7 +33,7 @@
                     <img src="{{song.imageUrl}}" alt="" style="width:100px;">
                 </td>
                 <td><button class="btn btn-primary" (click)="openModal(song, 'edit')">Edit</button></td>
-                <td><button class="btn btn-danger" (click)="deleteSongById(song.id)">Delete</button></td>
+                <td><button class="btn btn-danger" (click)="deleteSongById(song.songId)">Delete</button></td>
             </tr>
         </tbody>
     </table>
@@ -65,7 +65,7 @@
 
                     <div class="form-group">
                         <label for="artists">Artist</label>
-                        <select multiple [(ngModel)]="selectedArtists" name="artists" class="form-control">
+                        <select multiple ngModel="selectedArtists" name="artists" class="form-control">
                             <option *ngFor="let artist of artists" [ngValue]="artist">{{ artist.name }}</option>
                         </select>
                     </div>
@@ -109,7 +109,7 @@
             <div class="modal-body">
                 <form #editForm="ngForm">
 
-                    <input type="hidden" ngModel="{{editSong?.id}}" name="id" class="form-control" id="id">
+                    <input type="hidden" ngModel="{{editSong?.songId}}" name="id" class="form-control" id="id">
 
                     <div class="form-group">
                         <label for="title">Title</label>

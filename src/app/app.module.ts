@@ -5,15 +5,23 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { SongAdminComponent } from './song/admin/song.admin.component';
-import { SongViewComponent } from './song/view/song.view.component';
+import { SongAdminComponent } from './song/song.admin/song.admin.component';
+import { SongViewComponent } from './song/song.view/song.view.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ArtistAdminComponent } from './artist/artist.admin/artist.admin.component';
+import { ArtistViewComponent } from './artist/artist.view/artist.view.component';
+import { FrontpageComponent } from './frontpage/frontpage.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SongAdminComponent,
-    SongViewComponent
+    SongViewComponent,
+    NavbarComponent,
+    ArtistAdminComponent,
+    ArtistViewComponent,
+    FrontpageComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, AppRoutingModule

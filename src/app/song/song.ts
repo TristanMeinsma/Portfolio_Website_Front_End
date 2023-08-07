@@ -1,7 +1,7 @@
 import { Artist } from "../artist/artist";
 
 export interface Song {
-    id: number;
+    songId: number;
     title: string;
     artists: Artist[];
     imageUrl: string;
