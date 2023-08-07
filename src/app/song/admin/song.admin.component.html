@@ -1,6 +1,10 @@
 
+
+
+
 <!-- Overview Songs -->
 <div class="container" id="main-container">
+
     <h1>All Songs</h1>
     <button id="add-new-song" class="btn btn-success" (click)="openModal(null, 'add')">Add Song</button>
     <table class="table">
@@ -33,7 +37,11 @@
             </tr>
         </tbody>
     </table>
-    <h1>Preview</h1>
+    <h2>Preview</h2>
+    <div id="preview">
+        
+        <song-view></song-view>
+    </div>
 </div>
 
 <!-- Add Song Modal -->
@@ -139,3 +147,4 @@
         </div>
     </div>
 </div>
+
