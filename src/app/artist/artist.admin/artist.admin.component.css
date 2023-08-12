@@ -13,12 +13,13 @@ h4 {
     text-align: center;
 }
 
-button {
+img {
+    height: 50px;
+    width: 50px;
+}
+
+#add-new-song {
     margin-top: 10px;
     margin-bottom: 20px;
 }
 
-#preview {
-    background-color: rgb(220, 220, 220);
-    border: rgb(200, 200, 200) solid 1px;
-}

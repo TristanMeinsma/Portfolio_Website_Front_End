@@ -21,12 +21,13 @@ export class SongViewComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.getSongs();
+        this.songs = this.songs.sort((a, b) => a.orderNumber - b.orderNumber);
         this.getArtists();
     }
 
     ngAfterViewInit() {
-
         this.cards.changes.subscribe(() => {
+            this.songs = this.songs.sort((a, b) => a.orderNumber - b.orderNumber);
             this.setBackgroundColors();
         });
     }
@@ -80,19 +81,17 @@ export class SongViewComponent implements OnInit, AfterViewInit {
         });
     }
     
-    private convertImageToBase64(imageUrl: string): Promise<string> {
-        return fetch(imageUrl)
-            .then(response => response.blob())
-            .then(blob => {
-                return new Promise<string>((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(blob);
-                    reader.onloadend = () => {
-                        const base64data = reader.result as string;
-                        resolve(base64data);
-                    };
-                    reader.onerror = e => reject(e);
-                });
-            });
+    private async convertImageToBase64(imageUrl: string): Promise<string> {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        return await new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+                const base64data = reader.result as string;
+                resolve(base64data);
+            };
+            reader.onerror = e => reject(e);
+        });
     }
 }

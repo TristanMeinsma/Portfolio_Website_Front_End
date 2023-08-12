@@ -1,10 +1,12 @@
 import { Artist } from "../artist/artist";
 
 export interface Song {
-    songId: number;
+    id: number;
     title: string;
     artists: Artist[];
     imageUrl: string;
     spotifyLink: string;
     soundPreview: string;
+    showOnWebsite: boolean;
+    orderNumber: number;
 }

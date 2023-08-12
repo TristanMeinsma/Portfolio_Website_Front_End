@@ -1,5 +1,5 @@
 export interface Artist {
-    artistId: number;
+    id: number;
     name: string;
     spotifyProfileUrl: string;
     imageUrl: string;

@@ -22,13 +22,14 @@ export class ArtistService {
 
   public addArtist(artist: Artist): Observable<Artist> {
     return this.http.post<any>(`${this.artistUrl}/add`, artist);
-}
+  }
 
-public updateArtist(artist: Artist): Observable<Artist> {
-    return this.http.put<any>(`${this.artistUrl}/update`, artist);
-}
+  public updateArtist(artist: Artist): Observable<Artist> {
+      console.log("updatting artist in service", artist)
+      return this.http.put<any>(`${this.artistUrl}/update`, artist);
+  }
 
-public deleteArtist(artistId: number): Observable<void> {
-    return this.http.delete<any>(`${this.artistUrl}/delete/${artistId}`);
-}
+  public deleteArtist(artistId: number): Observable<void> {
+      return this.http.delete<any>(`${this.artistUrl}/delete/${artistId}`);
+  }
 }

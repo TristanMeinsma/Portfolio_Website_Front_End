@@ -28,6 +28,7 @@ export class SongAdminComponent implements OnInit {
     public getSongs(): void {
         this.songService.getSongs().subscribe(
             (response: Song[]) => {
+                console.log(response);
                 this.songs = response;
             },
             (error: HttpErrorResponse) => {
@@ -39,6 +40,7 @@ export class SongAdminComponent implements OnInit {
     public getArtists(): void {
         this.artistService.getArtists().subscribe(
             (response: Artist[]) => {
+                console.log(response);
                 this.artists = response;
             },
             (error: HttpErrorResponse) => {
@@ -82,7 +84,7 @@ export class SongAdminComponent implements OnInit {
     public updateSong(song: Song): void {
         this.songService.updateSong(song).subscribe(
             (response: Song) => {
-                console.log(response);
+                console.log('component', response);
                 this.getSongs();
             },
             (error: HttpErrorResponse) => {

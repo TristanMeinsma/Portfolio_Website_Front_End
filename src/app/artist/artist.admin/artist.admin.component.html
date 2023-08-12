@@ -4,7 +4,7 @@
     <h1>All Artists</h1>
     <button id="add-new-song" class="btn btn-success" (click)="openModal(null, 'add')">Add Artist</button>
     <table class="table">
-        <thead>
+        <thead class="thead-light">
             <tr>
                 <th>Name</th>
                 <th>Spotify Link</th>
@@ -18,22 +18,26 @@
         <tbody>
             <tr *ngFor="let artist of artists">
                 <td>{{artist.name}}</td>
-                <td><a href="{{artist.spotifyProfileUrl}}">{{artist.spotifyProfileUrl}}</a></td>
+                <td><a *ngIf="artist.spotifyProfileUrl" href="{{artist.spotifyProfileUrl}}">{{ artist.spotifyProfileUrl.length >
+                        40 ? (artist.spotifyProfileUrl | slice:13:35) + '...' : artist.spotifyProfileUrl }}</a></td>
                 <td>
-                    <img src="{{artist.imageUrl}}" alt="" style="width:100px;">
+                    <img src="{{artist.imageUrl}}">
                 </td>
-                <td>{{artist.showOnWebsite}}</td>
+                <td><ng-container *ngIf="artist.showOnWebsite; else cross">
+                        ✅
+                    </ng-container>
+                    <ng-template #cross>
+                        ❌
+                    </ng-template>
+                </td>
                 <td>{{artist.orderNumber}}</td>
-                <td><button class="btn btn-primary" (click)="openModal(artist, 'edit')">Edit</button></td>
-                <td><button class="btn btn-danger" (click)="deleteArtistById(artist.artistId)">Delete</button></td>
+                <td><button class="btn btn-primary btn-sm" (click)="openModal(artist, 'edit')">Edit</button></td>
+                <td><button class="btn btn-danger btn-sm" (click)="deleteArtistById(artist.id)">Delete</button></td>
             </tr>
         </tbody>
     </table>
     <h2>Preview</h2>
-    <div id="preview">
-        
-        <p>komt nog</p>
-    </div>
+    <artist-view></artist-view>
 </div>
 
 <!-- Add Artist Modal -->
@@ -70,7 +74,7 @@
                         <div class="form-control">
                             <input type="checkbox" ngModel name="showOnWebsite">
                         </div>
-                        
+
                     </div>
 
                     <div class="form-group">
@@ -102,7 +106,7 @@
             <div class="modal-body">
                 <form #editForm="ngForm">
 
-                    <input type="hidden" ngModel="{{editArtist?.artistId}}" name="id" class="form-control" id="id">
+                    <input type="hidden" ngModel="{{editArtist?.id}}" name="id" class="form-control" id="id">
 
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -111,7 +115,8 @@
 
                     <div class="form-group">
                         <label for="spotifyProfileUrl">Spotify Link</label>
-                        <input type="text" ngModel="{{editArtist?.spotifyProfileUrl}}" name="spotifyProfileUrl" class="form-control">
+                        <input type="text" ngModel="{{editArtist?.spotifyProfileUrl}}" name="spotifyProfileUrl"
+                            class="form-control">
                     </div>
 
                     <div class="form-group">
@@ -123,17 +128,19 @@
                         <label for="showOnWebsite">Show On Website</label>
                         <div class="form-control">
                             <input type="checkbox" ngModel="{{editArtist?.showOnWebsite}}" name="showOnWebsite">
-                        </div> 
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="orderNumber">Order Number</label>
-                        <input type="number" ngModel="{{editArtist?.orderNumber}}" name="orderNumber" class="form-control">
+                        <input type="number" ngModel="{{editArtist?.orderNumber}}" name="orderNumber"
+                            class="form-control">
                     </div>
 
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-dismiss="modal" id="edit-artist-form">Cancel</button>
-                        <button (click)="updateArtist(editForm.value)" type="submit" data-dismiss="modal" class="btn btn-primary" >Save</button>
+                        <button (click)="updateArtist(editForm.value)" type="submit" data-dismiss="modal"
+                            class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>

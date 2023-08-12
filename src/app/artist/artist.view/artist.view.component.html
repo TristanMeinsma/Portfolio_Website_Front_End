@@ -1,1 +1,8 @@
-<p>artist.view works!</p>
+<div id="preview" class="horizontal-container">
+    <div class="horizontal-item" *ngFor="let artist of artists">
+        <img src="{{artist.imageUrl}}" alt="">
+    </div>
+</div>
+
+
+

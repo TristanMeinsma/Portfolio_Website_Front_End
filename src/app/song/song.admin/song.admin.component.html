@@ -15,6 +15,8 @@
                 <th>Sound Preview</th>
                 <th>Artists</th>
                 <th>Image</th>
+                <th>Show On Website</th>
+                <th>Order Number</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -22,7 +24,7 @@
         <tbody>
             <tr *ngFor="let song of songs">
                 <td>{{song.title}}</td>
-                <td><a *ngIf="song.spotifyLink" href="{{song.spotifyLink}}">{{ song.spotifyLink.length > 40 ? (song.spotifyLink | slice:13:40) + '...' : song.spotifyLink }}</a></td>
+                <td><a *ngIf="song.spotifyLink" href="{{song.spotifyLink}}">{{ song.spotifyLink.length > 40 ? (song.spotifyLink | slice:13:35) + '...' : song.spotifyLink }}</a></td>
                 <td>{{song.soundPreview}}</td>
                 <td>
                     <div *ngFor="let artist of song.artists">
@@ -30,10 +32,17 @@
                     </div>
                 </td>
                 <td>
-                    <img src="{{song.imageUrl}}" alt="" style="width:100px;">
+                    <img src="{{song.imageUrl}}">
                 </td>
-                <td><button class="btn btn-primary" (click)="openModal(song, 'edit')">Edit</button></td>
-                <td><button class="btn btn-danger" (click)="deleteSongById(song.songId)">Delete</button></td>
+                <td><ng-container *ngIf="song.showOnWebsite; else cross">
+                    ✅
+                  </ng-container>
+                  <ng-template #cross>
+                    ❌
+                  </ng-template></td>
+                <td>{{song.orderNumber}}</td>
+                <td><button class="btn btn-primary btn-sm" (click)="openModal(song, 'edit')">Edit</button></td>
+                <td><button class="btn btn-danger btn-sm" (click)="deleteSongById(song.id)">Delete</button></td>
             </tr>
         </tbody>
     </table>
@@ -85,6 +94,19 @@
                         <input type="text" ngModel name="soundPreview" class="form-control">
                     </div>
 
+                    <div class="form-group">
+                        <label for="showOnWebsite">Show On Website</label>
+                        <div class="form-control">
+                            <input type="checkbox" ngModel name="showOnWebsite">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number</label>
+                        <input type="number" ngModel name="orderNumber" class="form-control">
+                    </div>
+
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-dismiss="modal" id="add-song-form">Cancel</button>
                         <button type="submit" class="btn btn-primary">Save</button>
@@ -109,7 +131,7 @@
             <div class="modal-body">
                 <form #editForm="ngForm">
 
-                    <input type="hidden" ngModel="{{editSong?.songId}}" name="id" class="form-control" id="id">
+                    <input type="hidden" ngModel="{{editSong?.id}}" name="id" class="form-control" id="id">
 
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -136,6 +158,19 @@
                     <div class="form-group">
                         <label for="soundPreview">Sound Preview</label>
                         <input type="text" ngModel="{{editSong?.soundPreview}}" name="soundPreview" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="showOnWebsite">Show On Website</label>
+                        <div class="form-control">
+                            <input type="checkbox" ngModel="{{editSong?.showOnWebsite}}" name="showOnWebsite">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number</label>
+                        <input type="number" ngModel="{{editSong?.orderNumber}}" name="orderNumber"
+                            class="form-control">
                     </div>
 
                     <div class="modal-footer">

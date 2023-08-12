@@ -1,3 +1,7 @@
 
 @import "/Users/tristanmeinsma/MakeITWork/VakantieProjecten/PortfolioWebsite/portfolio-front-end/node_modules/bootstrap/dist/css/bootstrap.css";
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+
+body {
+    background-color: rgb(245, 245, 245);
+}

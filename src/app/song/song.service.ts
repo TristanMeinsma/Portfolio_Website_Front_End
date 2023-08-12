@@ -26,6 +26,7 @@ export class SongService {
     }
 
     public updateSong(song: Song): Observable<Song> {
+        console.log('service', song);
         return this.http.put<any>(`${this.songUrl}/update`, song);
     }
 

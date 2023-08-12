@@ -24,6 +24,7 @@ export class ArtistAdminComponent {
         this.artistService.getArtists().subscribe(
             (response: Artist[]) => {
                 this.artists = response;
+                console.log(response);
             },
             (error: HttpErrorResponse) => {
                 alert(error.message);
@@ -49,7 +50,7 @@ export class ArtistAdminComponent {
         this.artistService.addArtist(addForm.value).subscribe(
             (response: Artist) => {
                 console.log(response);
-                this.getArtists;
+                this.getArtists();
                 addForm.reset();
             },
             (error: HttpErrorResponse) => {
@@ -62,8 +63,9 @@ export class ArtistAdminComponent {
     public updateArtist(artist: Artist) {
         this.artistService.updateArtist(artist).subscribe(
             (response: Artist) => {
+                console.log('updating artist in component')
                 console.log(response);
-                this.getArtists;
+                this.getArtists();
             },
             (error: HttpErrorResponse) => {
                 alert(error.message);
