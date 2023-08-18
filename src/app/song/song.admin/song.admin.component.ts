@@ -17,6 +17,7 @@ export class SongAdminComponent implements OnInit {
     public deleteSong!: Song;
     public artists!: Artist[];
     public selectedArtists: number[] = [];
+    public editArtists: Artist[] = [];
 
     constructor(private songService: SongService, private artistService: ArtistService) { }
 
@@ -104,6 +105,10 @@ export class SongAdminComponent implements OnInit {
         }
         if (mode === 'edit') {
             this.editSong = song;
+            this.editArtists = this.editSong?.artists || [];
+
+            console.log('editArtists', this.editArtists);
+            
             button.setAttribute('data-target', '#updateSongModal')
         }
 

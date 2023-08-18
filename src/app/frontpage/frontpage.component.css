@@ -1,7 +1,7 @@
 
 .banner {
     background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.0) 30%, rgba(15, 15, 15, 1)),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.0) 30%, rgb(25, 25, 25)),
     url(https://cdn.shopify.com/s/files/1/0606/5792/6341/files/banner_halfsize_2000x.jpg?v=1657822286);
     background-size: cover;
     background-position: center;
@@ -22,12 +22,20 @@
   
 #main-container {
     color: whitesmoke;
-    background-color: rgb(15, 15, 15);
+    background-color: rgb(25, 25, 25);
     font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 
 h2 {
+    font-weight: bold;
     text-align: center;
+    padding-top: 20px;
+}
+
+.artists {
+    color: black;
+    background-color: rgb(250, 250, 250);
+    margin: 0px
 }
   
 img {

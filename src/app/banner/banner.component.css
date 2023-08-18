@@ -1,0 +1,66 @@
+.banner {
+    position: relative;
+    width: 100%; 
+    height: 70vh;
+    overflow: hidden;
+}
+
+.zoom-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: zoomOut 2s forwards;
+    position: relative; 
+    z-index: 1; /* Ensure the image is below the gradient */
+}
+
+.banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.0) 30%, rgb(25, 25, 25));
+    z-index: 2; /* Ensure the gradient is above the image */
+}
+
+@keyframes zoomOut {
+    from {
+        transform: scale(1.2);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    animation: fadeIn 2s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.block {
+    border: none;
+    border-radius: 10px;
+    background-color: #00b0a4;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+  }

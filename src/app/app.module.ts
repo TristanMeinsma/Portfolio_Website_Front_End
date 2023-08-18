@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ArtistAdminComponent } from './artist/artist.admin/artist.admin.component';
 import { ArtistViewComponent } from './artist/artist.view/artist.view.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
+import { BannerComponent } from './banner/banner.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
     NavbarComponent,
     ArtistAdminComponent,
     ArtistViewComponent,
-    FrontpageComponent
+    FrontpageComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, AppRoutingModule
