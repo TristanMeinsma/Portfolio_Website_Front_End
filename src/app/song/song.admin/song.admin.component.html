@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let song of songs">
+            <tr *ngFor="let song of songs | orderBy:'orderNumber'">
                 <td>{{song.title}}</td>
                 <td><a *ngIf="song.spotifyLink" href="{{song.spotifyLink}}">{{ song.spotifyLink.length > 40 ? (song.spotifyLink | slice:13:35) + '...' : song.spotifyLink }}</a></td>
                 <td>{{song.soundPreview}}</td>
@@ -98,8 +98,7 @@
                         <label for="showOnWebsite">Show On Website</label>
                         <div class="form-control">
                             <input type="checkbox" [(ngModel)]="editSong.showOnWebsite" name="showOnWebsite">
-                    </div>
-
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -140,7 +139,7 @@
 
                     <div class="form-group">
                         <label for="artists">Artist</label>
-                        <select multiple [(ngModel)]="editArtists" name="artists" class="form-control">
+                        <select multiple [(ngModel)]="editArtists" name="artists" class="form-control" *ngIf="artists">
                             <option *ngFor="let artist of artists" [ngValue]="artist">{{ artist.name }}</option>
                         </select>
                     </div>
@@ -163,7 +162,7 @@
                     <div class="form-group">
                         <label for="showOnWebsite">Show On Website</label>
                         <div class="form-control">
-                            <input type="checkbox" ngModel="{{editSong?.showOnWebsite}}" name="showOnWebsite">
+                            <input type="checkbox" [(ngModel)]="editSong.showOnWebsite" name="showOnWebsite" *ngIf="editSong">
                         </div>
                     </div>
 

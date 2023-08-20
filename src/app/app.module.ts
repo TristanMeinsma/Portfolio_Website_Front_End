@@ -12,6 +12,7 @@ import { ArtistAdminComponent } from './artist/artist.admin/artist.admin.compone
 import { ArtistViewComponent } from './artist/artist.view/artist.view.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { BannerComponent } from './banner/banner.component';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { BannerComponent } from './banner/banner.component';
     ArtistAdminComponent,
     ArtistViewComponent,
     FrontpageComponent,
-    BannerComponent
+    BannerComponent,
+    OrderByPipe
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, AppRoutingModule

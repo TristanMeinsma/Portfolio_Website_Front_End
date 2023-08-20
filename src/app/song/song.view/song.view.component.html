@@ -1,5 +1,5 @@
 <div class="song-slider">
-    <div *ngFor="let song of songs; let i = index">
+    <div *ngFor="let song of songs | orderBy:'orderNumber'">
         <div *ngIf="song.showOnWebsite" class="card" #card style="width: 18rem;">
             <div class="image-border">
                 <img class="card-img-top soft-border" src="{{ song.imageUrl }}" alt="Card image cap">

@@ -64,11 +64,6 @@ export class SongAdminComponent implements OnInit {
     public addSong(addForm: NgForm): void {
         document.getElementById("add-song-form")?.click();
 
-        const songWithArtists = {
-            ...addForm.value,
-            artists: this.selectedArtists
-        };
-
         this.songService.addSong(addForm.value).subscribe(
             (response: Song) => {
                 console.log(response);

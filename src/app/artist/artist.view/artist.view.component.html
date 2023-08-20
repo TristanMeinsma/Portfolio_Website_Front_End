@@ -1,5 +1,5 @@
 <div id="preview" class="horizontal-container">
-    <div class="horizontal-item" *ngFor="let artist of artists">
+    <div class="horizontal-item" *ngFor="let artist of artists | orderBy:'orderNumber'">
         <img *ngIf="artist.showOnWebsite" src="{{artist.imageUrl}}" alt="">
     </div>
 </div>

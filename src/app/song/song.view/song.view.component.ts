@@ -17,17 +17,15 @@ export class SongViewComponent implements OnInit, AfterViewInit {
     public songs!: Song[];
     public artists!: Artist[];
 
-    constructor(private renderer: Renderer2, private songService: SongService, private artistService: ArtistService) { }
+    constructor(private songService: SongService, private artistService: ArtistService) { }
 
     ngOnInit(): void {
         this.getSongs();
-        this.songs = this.songs.sort((a, b) => a.orderNumber - b.orderNumber);
         this.getArtists();
     }
 
     ngAfterViewInit() {
         this.cards.changes.subscribe(() => {
-            this.songs = this.songs.sort((a, b) => a.orderNumber - b.orderNumber);
             this.setBackgroundColors();
         });
     }
