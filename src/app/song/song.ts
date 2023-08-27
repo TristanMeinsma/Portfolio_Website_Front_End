@@ -9,4 +9,5 @@ export interface Song {
     soundPreview: string;
     showOnWebsite: boolean;
     orderNumber: number;
+    isPlaying?: boolean;
 }

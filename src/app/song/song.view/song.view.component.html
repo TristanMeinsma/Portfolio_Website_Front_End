@@ -1,3 +1,5 @@
+
+<div id="playing-song"></div>
 <div class="song-slider">
     <div *ngFor="let song of songs | orderBy:'orderNumber'">
         <div *ngIf="song.showOnWebsite" class="card" #card style="width: 18rem;">
@@ -13,8 +15,11 @@
 
                         </ng-container>
                     </small></p>
-                <img src="https://cdn2.iconfinder.com/data/icons/basics-1/100/Play-512.png" class="play-button" alt="">
+                    <img [src]="song.isPlaying ? 'assets/img/pause button.png' : 'assets/img/play button.png'" class="play-button" alt="" (click)="playSong(song)">
+
+                <audio #audioplayer [src]="'data:audio/mpeg;base64,' + song.soundPreview" preload="auto"></audio>
             </div>
         </div>
     </div>
 </div>
+

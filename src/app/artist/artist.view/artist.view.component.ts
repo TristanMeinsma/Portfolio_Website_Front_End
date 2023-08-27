@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Artist } from '../artist';
 import { ArtistService } from '../artist.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -8,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
     templateUrl: './artist.view.component.html',
     styleUrls: ['./artist.view.component.css']
 })
-export class ArtistViewComponent {
+export class ArtistViewComponent implements OnInit {
     public artists!: Artist[];
 
     constructor(private artistService: ArtistService) { }
@@ -21,7 +21,6 @@ export class ArtistViewComponent {
         this.artistService.getArtists().subscribe(
             (response: Artist[]) => {
                 this.artists = response;
-                console.log(response);
             },
             (error: HttpErrorResponse) => {
                 alert(error.message);

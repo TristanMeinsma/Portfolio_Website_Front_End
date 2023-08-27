@@ -58,9 +58,11 @@
 .block {
     border: none;
     border-radius: 10px;
-    background-color: #00b0a4;
+    background-color: #157347;
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;
     text-align: center;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
   }

@@ -25,7 +25,6 @@ export class ArtistService {
   }
 
   public updateArtist(artist: Artist): Observable<Artist> {
-      console.log("updatting artist in service", artist)
       return this.http.put<any>(`${this.artistUrl}/update`, artist);
   }
 

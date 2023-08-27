@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, Renderer2, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, Renderer2, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { Song } from '../song';
 import { SongService } from '../song.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -14,8 +14,11 @@ import { FastAverageColor } from 'fast-average-color';
 
 export class SongViewComponent implements OnInit, AfterViewInit {
     @ViewChildren('card') cards!: QueryList<ElementRef>;
+    @ViewChild('audioplayer') audioPlayer!: ElementRef;
+
     public songs!: Song[];
     public artists!: Artist[];
+    public currentButtonImage: string = 'assets/img/play button.png';
 
     constructor(private songService: SongService, private artistService: ArtistService) { }
 
@@ -91,5 +94,33 @@ export class SongViewComponent implements OnInit, AfterViewInit {
             };
             reader.onerror = e => reject(e);
         });
+    }
+
+    public playSong(song: Song): void {
+        const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+
+        if (audio.src === 'data:audio/mp3;base64,' + song.soundPreview && audio.paused) {
+            this.currentButtonImage = 'assets/img/pause button.png';
+            audio.play();
+            song.isPlaying = true;
+            this.showPlayingSong(song);
+
+        } else if (audio.src != 'data:audio/mp3;base64,' + song.soundPreview && audio.paused) {
+            this.currentButtonImage = 'assets/img/pause button.png';
+            audio.src = 'data:audio/mp3;base64,' + song.soundPreview;
+            audio.play();
+            song.isPlaying = true;
+            this.showPlayingSong(song);
+
+        } else {
+            this.currentButtonImage = 'assets/img/play button.png';
+            audio.pause();
+            this.songs.forEach(song => song.isPlaying = false);
+            document.getElementById('playing-song')!.innerHTML = ' ';
+        }
+    }
+
+    public showPlayingSong(song: Song): void {
+        document.getElementById('playing-song')!.innerHTML = '🔊 ' + song.artists[0].name + ' - ' + song.title;
     }
 }

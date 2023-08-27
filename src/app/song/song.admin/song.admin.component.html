@@ -25,7 +25,7 @@
             <tr *ngFor="let song of songs | orderBy:'orderNumber'">
                 <td>{{song.title}}</td>
                 <td><a *ngIf="song.spotifyLink" href="{{song.spotifyLink}}">{{ song.spotifyLink.length > 40 ? (song.spotifyLink | slice:13:35) + '...' : song.spotifyLink }}</a></td>
-                <td>{{song.soundPreview}}</td>
+                <td><audio controls><source src="data:audio/mpeg;base64, {{song.soundPreview}}" type="audio/mpeg"></audio></td>
                 <td>
                     <div *ngFor="let artist of song.artists">
                         {{artist.name}}

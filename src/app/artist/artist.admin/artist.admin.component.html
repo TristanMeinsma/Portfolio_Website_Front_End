@@ -18,7 +18,8 @@
         <tbody>
             <tr *ngFor="let artist of artists | orderBy:'orderNumber'">
                 <td>{{artist.name}}</td>
-                <td><a *ngIf="artist.spotifyProfileUrl" href="{{artist.spotifyProfileUrl}}">{{ artist.spotifyProfileUrl.length >
+                <td><a *ngIf="artist.spotifyProfileUrl" href="{{artist.spotifyProfileUrl}}">{{
+                        artist.spotifyProfileUrl.length >
                         40 ? (artist.spotifyProfileUrl | slice:13:35) + '...' : artist.spotifyProfileUrl }}</a></td>
                 <td>
                     <img src="{{artist.imageUrl}}">
@@ -127,10 +128,11 @@
                     <div class="form-group">
                         <label for="showOnWebsite">Show On Website</label>
                         <div class="form-control">
-                            <input type="checkbox" [(ngModel)]="editArtist.showOnWebsite" name="showOnWebsite" *ngIf="editArtist">
+                            <input type="checkbox" [(ngModel)]="editArtist.showOnWebsite" name="showOnWebsite"
+                                *ngIf="editArtist">
                         </div>
                     </div>
-                    
+
 
                     <div class="form-group">
                         <label for="orderNumber">Order Number</label>

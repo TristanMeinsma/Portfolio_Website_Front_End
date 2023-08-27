@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { Artist } from '../../artist/artist';
@@ -24,7 +24,6 @@ export class ArtistAdminComponent {
         this.artistService.getArtists().subscribe(
             (response: Artist[]) => {
                 this.artists = response;
-                console.log(response);
             },
             (error: HttpErrorResponse) => {
                 alert(error.message);
@@ -49,7 +48,6 @@ export class ArtistAdminComponent {
 
         this.artistService.addArtist(addForm.value).subscribe(
             (response: Artist) => {
-                console.log(response);
                 this.getArtists();
                 addForm.reset();
             },
@@ -63,8 +61,6 @@ export class ArtistAdminComponent {
     public updateArtist(artist: Artist) {
         this.artistService.updateArtist(artist).subscribe(
             (response: Artist) => {
-                console.log('updating artist in component')
-                console.log(response);
                 this.getArtists();
             },
             (error: HttpErrorResponse) => {
