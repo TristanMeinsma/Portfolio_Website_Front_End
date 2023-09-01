@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, Renderer2, ViewChildren, QueryList, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, Renderer2, ViewChildren, QueryList, ViewChild, HostListener } from '@angular/core';
 import { Song } from '../song';
 import { SongService } from '../song.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -25,6 +25,17 @@ export class SongViewComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.getSongs();
         this.getArtists();
+    }
+
+    @HostListener('window:scroll', ['$event'])
+    onScroll(event: any) {
+        this.cards.forEach(card => {
+            const rect = card.nativeElement.getBoundingClientRect();
+            if (rect.top + rect.height * 0.4 <= window.innerHeight && rect.bottom >= 0) {   
+                card.nativeElement.style.opacity = '1';
+                card.nativeElement.style.transform = 'translateX(0)';
+            }
+        });
     }
 
     ngAfterViewInit() {

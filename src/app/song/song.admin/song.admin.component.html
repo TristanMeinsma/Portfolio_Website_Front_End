@@ -46,11 +46,7 @@
             </tr>
         </tbody>
     </table>
-    <h2>Preview</h2>
-    <div id="preview">
-        
-        <song-view></song-view>
-    </div>
+    
 </div>
 
 <!-- Add Song Modal -->
@@ -91,7 +87,7 @@
 
                     <div class="form-group">
                         <label for="soundPreview">Sound Preview</label>
-                        <input type="text" ngModel name="soundPreview" class="form-control">
+                        <input type="file" (change)="onFileSelected($event)" name="soundPreview" class="form-control">
                     </div>
 
                     <div *ngIf="editSong" class="form-group">
@@ -156,7 +152,7 @@
 
                     <div class="form-group">
                         <label for="soundPreview">Sound Preview</label>
-                        <input type="text" ngModel="{{editSong?.soundPreview}}" name="soundPreview" class="form-control">
+                        <input type="file" (change)="onFileSelected($event)" name="soundPreview" class="form-control">
                     </div>
 
                     <div class="form-group">
@@ -181,4 +177,10 @@
         </div>
     </div>
 </div>
+
+<h2>Preview</h2>
+    <div id="preview">
+        
+        <song-view></song-view>
+    </div>
 

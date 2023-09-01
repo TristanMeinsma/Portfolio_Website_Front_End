@@ -6,7 +6,7 @@ export interface Song {
     artists: Artist[];
     imageUrl: string;
     spotifyLink: string;
-    soundPreview: string;
+    soundPreview: string | File;
     showOnWebsite: boolean;
     orderNumber: number;
     isPlaying?: boolean;

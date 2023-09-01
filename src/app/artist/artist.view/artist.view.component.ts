@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Host, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Artist } from '../artist';
 import { ArtistService } from '../artist.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -10,6 +10,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ArtistViewComponent implements OnInit {
     public artists!: Artist[];
+
+    @ViewChild('previewContainer') previewContainer!: ElementRef;
+
+    @HostListener('window:scroll', ['$event'])
+    onScroll(event: any) {
+        const rect = this.previewContainer.nativeElement.getBoundingClientRect();
+        if (rect.top + rect.height * 0.5 <= window.innerHeight && rect.bottom >= 0) {
+            this.previewContainer.nativeElement.style.opacity = '1';
+        }
+    }
 
     constructor(private artistService: ArtistService) { }
 

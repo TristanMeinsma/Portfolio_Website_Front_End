@@ -2,10 +2,13 @@
 <div id="playing-song"></div>
 <div class="song-slider">
     <div *ngFor="let song of songs | orderBy:'orderNumber'">
-        <div *ngIf="song.showOnWebsite" class="card" #card style="width: 18rem;">
+        <div *ngIf="song.showOnWebsite" class="card" #card style="width: 15vw;">
             <div class="image-border">
-                <img class="card-img-top soft-border" src="{{ song.imageUrl }}" alt="Card image cap">
+                <a [href]="song.spotifyLink" target="_blank" rel="noopener noreferrer">
+                    <img class="card-img-top soft-border" src="{{ song.imageUrl }}" alt="Card image cap">
+                </a>
             </div>
+            
 
             <div class="card-body">
                 <h5 class="card-title"><a href="{{ song.spotifyLink }}" target="_blank" rel="noopener noreferrer">{{ song.title }}</a></h5>

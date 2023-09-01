@@ -21,13 +21,28 @@ export class SongService {
         return this.http.get<any>(`${this.songUrl}/find/${songId}`)
     }
 
-    public addSong(song: Song): Observable<Song> {
-        return this.http.post<any>(`${this.songUrl}/add`, song);
+    public addSong(song: Song, file?: File): Observable<Song> {
+        const formData = new FormData();
+
+        formData.append('song', JSON.stringify(song));
+
+        if (file) {
+            formData.append('file', file, file.name);
+        }
+
+        return this.http.post<any>(`${this.songUrl}/add`, formData);
     }
 
-    public updateSong(song: Song): Observable<Song> {
-        console.log('service', song);
-        return this.http.put<any>(`${this.songUrl}/update`, song);
+    public updateSong(song: Song, file?: File): Observable<Song> {
+        const formData = new FormData();
+
+        formData.append('song', JSON.stringify(song));
+
+        if (file) {
+            formData.append('file', file, file.name);
+        }
+
+        return this.http.put<any>(`${this.songUrl}/update`, formData);
     }
 
     public deleteSong(songId: number): Observable<void> {

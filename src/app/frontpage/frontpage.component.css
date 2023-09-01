@@ -26,10 +26,14 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 
-h2 {
+h1, h2 {
     font-weight: bold;
     text-align: center;
     padding-top: 20px;
+}
+
+h1 {
+    padding-top: 40px;
 }
 
 .artists {
@@ -43,6 +47,8 @@ img {
     width: 15%;
   
 }
+
+
   
   
   

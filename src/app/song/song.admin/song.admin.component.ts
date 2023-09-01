@@ -18,6 +18,7 @@ export class SongAdminComponent implements OnInit {
     public artists!: Artist[];
     public selectedArtists: number[] = [];
     public editArtists: Artist[] = [];
+    public selectedFile!: File;
 
     constructor(private songService: SongService, private artistService: ArtistService) { }
 
@@ -64,7 +65,7 @@ export class SongAdminComponent implements OnInit {
     public addSong(addForm: NgForm): void {
         document.getElementById("add-song-form")?.click();
 
-        this.songService.addSong(addForm.value).subscribe(
+        this.songService.addSong(addForm.value, this.selectedFile).subscribe(
             (response: Song) => {
                 console.log(response);
                 this.getSongs();
@@ -78,9 +79,9 @@ export class SongAdminComponent implements OnInit {
     }
 
     public updateSong(song: Song): void {
-        this.songService.updateSong(song).subscribe(
+        this.songService.updateSong(song, this.selectedFile).subscribe(
             (response: Song) => {
-                console.log('component', response);
+                console.log(response);
                 this.getSongs();
             },
             (error: HttpErrorResponse) => {
@@ -109,5 +110,12 @@ export class SongAdminComponent implements OnInit {
 
         container?.appendChild(button);
         button.click();
+    }
+
+    onFileSelected(event: Event): void {
+        const input = event.target as HTMLInputElement;;
+        if (input.files && input.files.length) {
+            this.selectedFile = input.files[0];
+        }
     }
 }
